@@ -1,0 +1,4 @@
+export enum LocalStorageKeys {
+  CART_ITEMS = 'CART_ITEMS',
+  USER_AUTHENTICATED_EMAIL = 'USER_AUTHENTICATED_EMAIL',
+}
