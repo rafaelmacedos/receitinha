@@ -1,52 +1,33 @@
-import Image from 'next/image'
-import Link from 'next/link'
+import Image from "next/image";
+import Link from "next/link";
 
-import receitinhalogo from '../../assets/img/logo-receitinha.png'
+import receitinhalogo from "../../assets/img/logo-receitinha.png";
+import tituloReceitinha from "../../assets/img/receitinha-titulo.png";
 
-import { AuthForm } from '@/components/auth-form'
+import { AuthForm } from "@/components/auth-form";
 
 export default function Login() {
   return (
-    <div className="container relative h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-      <div className="relative hidden h-full flex-col items-center justify-center bg-muted text-white dark:border-r lg:flex">
-        <div className="absolute inset-0 z-10 bg-orange-400" />
-        <div className="absolute inset-0" />
-        <div className="relative z-20 flex items-center bg-[url('/login-background.png')]">
-          <Image src={receitinhalogo} alt="Receitinha Logo" width={360} />
-        </div>
+    <div className="container relative flex h-screen items-center justify-center gap-32 bg-[url('/login-background.png')] lg:max-w-none lg:grid-cols-2 lg:px-0">
+      <div className="flex-col content-center items-center justify-center ">
+        <Image
+          className=""
+          src={receitinhalogo}
+          alt="Receitinha Logo"
+          width={560}
+        />
       </div>
-      <div className="p-8">
-        <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-          <div className="flex flex-col space-y-2 text-center">
-            <h1 className="text-2xl font-semibold tracking-tight">
-              Se achegue, pode entrar!
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              Entre com e-mail e senha ou faça seu cadastro!
-            </p>
-          </div>
 
-          <AuthForm />
-
-          <p className="px-8 text-center text-sm text-muted-foreground">
-            Ao se autenticar, você concorda com nossos{' '}
-            <Link
-              href="/terms"
-              className="underline underline-offset-4 hover:text-primary"
-            >
-              Termos de Uso
-            </Link>{' '}
-            e{' '}
-            <Link
-              href="/privacy"
-              className="underline underline-offset-4 hover:text-primary"
-            >
-              Política de Privacidade
-            </Link>
-            .
-          </p>
+      <div className="flex-col justify-center content-center">
+        <Image className="mx-auto mb-4" src={tituloReceitinha} alt="Titulo" width={370} />
+        <div
+          className="flex h-[455px] w-[471px] items-center
+        justify-center rounded-lg bg-white"
+        >
+          <AuthForm className="w-10/12 h-84"/>
         </div>
+        
       </div>
     </div>
-  )
+  );
 }

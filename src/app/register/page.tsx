@@ -3,8 +3,7 @@ import Link from "next/link";
 
 import receitinhalogo from "../../assets/img/logo-receitinha.png";
 import tituloReceitinha from "../../assets/img/receitinha-titulo.png";
-
-import { AuthForm } from "@/components/auth-form";
+import { RegisterUserForm } from '@/components/register-user-form'
 
 export default function Login() {
   return (
@@ -24,7 +23,7 @@ export default function Login() {
           className="flex h-[455px] w-[471px] items-center
         justify-center rounded-lg bg-white"
         >
-          <AuthForm className="w-10/12 h-64"/>
+          <RegisterUserForm className="w-10/12"/>
         </div>
         
       </div>

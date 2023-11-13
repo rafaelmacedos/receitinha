@@ -18,7 +18,7 @@ import { Button } from "./ui/button";
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
-export function AuthForm({ className, ...props }: UserAuthFormProps) {
+export function RegisterUserForm({ className, ...props }: UserAuthFormProps) {
   const authSchema = z.object({
     email: z.string().min(1, "E-mail é obrigatório").email("E-mail inválido"),
     password: z
@@ -52,20 +52,21 @@ export function AuthForm({ className, ...props }: UserAuthFormProps) {
     // Fake loading
     setTimeout(() => {
       setIsSubmitting(false);
-      router.push("/home");
+      router.push("/products");
     }, 1500);
   };
 
   return (
-    <div className={cn("grid gap-6", className)} {...props}>
-      <div className="text-center">
-        <h1 className="text-3xl">Login</h1>
+    <div className={cn("grid gap-4", className)} {...props}>
+      <div className="w-full text-center">
+        <h1 className="text-3xl">Cadastro</h1>
       </div>
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-2">
           <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="email">
-              E-mail
+            <Label htmlFor="email" className="text-lg">
+              E-mail <span className="text-red-500">*</span>
             </Label>
             <Input
               id="email"
@@ -77,14 +78,14 @@ export function AuthForm({ className, ...props }: UserAuthFormProps) {
               {...register("email")}
             />
             {errors.email && (
-              <span className="mb-1 text-sm text-red-500">
+              <span className="text-sm text-red-500">
                 {errors.email?.message}
               </span>
             )}
           </div>
           <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="password">
-              Senha
+            <Label htmlFor="password" className="text-lg">
+              Senha <span className="text-red-500">*</span>
             </Label>
             <Input
               id="password"
@@ -93,7 +94,21 @@ export function AuthForm({ className, ...props }: UserAuthFormProps) {
               {...register("password")}
             />
             {errors.password && (
-              <span className="mb-1 text-sm text-red-500">
+              <span className="text-sm text-red-500">
+                {errors.password?.message}
+              </span>
+            )}
+            <Label htmlFor="confirm-password" className="text-lg">
+              Confirme sua Senha <span className="text-red-500">*</span>
+            </Label>
+            <Input
+              id="confirm-password"
+              placeholder="Confirme sua senha"
+              type="password"
+              {...register("password")}
+            />
+            {errors.password && (
+              <span className="text-sm text-red-500">
                 {errors.password?.message}
               </span>
             )}
@@ -105,32 +120,15 @@ export function AuthForm({ className, ...props }: UserAuthFormProps) {
             {isSubmitting ? (
               <CircleNotch className="animate-spin" size={18} />
             ) : (
-              "Entrar"
+              "Cadastrar"
             )}
           </Button>
         </div>
       </form>
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
-        </div>
-        <div className="relative flex justify-center text-sm">
-          <span className="bg-background px-3 text-muted-foreground">
-            <p>
-              Ainda não <strong>poupa tempo</strong> com o Receitinha?
-            </p>
-          </span>
-        </div>
-      </div>
-
-      <div className="flex items-center justify-center">
-        <Button
-          className="w-64 bg-blue-600 text-white hover:bg-blue-800 hover:text-white"
-          variant="outline"
-          type="button"
-        >
-          <Link href="/register">Comece agora</Link>
-        </Button>
+      <div className="relative flex justify-center text-sm">
+        <span className="bg-background px-4 text-muted-foreground">
+          <Link href="/login">Voltar para Login</Link>
+        </span>
       </div>
     </div>
   );
