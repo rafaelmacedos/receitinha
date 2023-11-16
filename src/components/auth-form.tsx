@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,6 +14,7 @@ import { LocalStorageKeys } from "@/utils/enums/local-storage-keys.enum";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { AuthContext } from "@/contexts/AuthContext";
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -37,8 +37,7 @@ export function AuthForm({ className, ...props }: UserAuthFormProps) {
   });
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-
-  const router = useRouter();
+  const { signIn } = useContext(AuthContext);
 
   const onSubmit: SubmitHandler<Auth> = (data) => {
     setIsSubmitting(true);
@@ -48,12 +47,14 @@ export function AuthForm({ className, ...props }: UserAuthFormProps) {
       LocalStorageKeys.USER_AUTHENTICATED_EMAIL,
       data.email,
     );
-
+    // console.log(data)
     // Fake loading
-    setTimeout(() => {
-      setIsSubmitting(false);
-      router.push("/home");
-    }, 1500);
+    // setTimeout(() => {
+    //   setIsSubmitting(false);
+    //   router.push("/home");
+    // }, 1500);
+
+    signIn(data)
   };
 
   return (
@@ -124,13 +125,15 @@ export function AuthForm({ className, ...props }: UserAuthFormProps) {
       </div>
 
       <div className="flex items-center justify-center">
+      <Link href="/register">
         <Button
           className="w-64 bg-blue-600 text-white hover:bg-blue-800 hover:text-white"
           variant="outline"
           type="button"
         >
-          <Link href="/register">Comece agora</Link>
+          Comece agora
         </Button>
+        </Link>
       </div>
     </div>
   );

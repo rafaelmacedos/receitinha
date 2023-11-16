@@ -6,6 +6,7 @@ import tituloReceitinha from "../../assets/img/receitinha-titulo.png";
 
 import { AuthForm } from "@/components/auth-form";
 
+
 export default function Login() {
   return (
     <div className="container relative flex h-screen items-center justify-center gap-32 bg-[url('/login-background.png')] lg:max-w-none lg:grid-cols-2 lg:px-0">
