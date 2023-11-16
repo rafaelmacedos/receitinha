@@ -9,14 +9,14 @@ import './globals.css'
 import { AuthProvider } from '../contexts/AuthContext'
 const baloo2 = Baloo_2({ subsets: ['latin'] })
 
-export const metadata: Metadata = {
-  title: 'Receitinha',
-  description:
-    'Aplicação desenvolvida para a competência - Integrar Interfaces e Serviços WEB',
-  icons: {
-    icon: '/favicon.ico',
-  },
-}
+// export const metadata: Metadata = {
+//   title: 'Receitinha',
+//   description:
+//     'Aplicação desenvolvida para a competência - Integrar Interfaces e Serviços WEB',
+//   icons: {
+//     icon: '/favicon.ico',
+//   },
+// }
 
 export default function RootLayout({
   children,

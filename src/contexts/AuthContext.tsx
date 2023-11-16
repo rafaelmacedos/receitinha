@@ -35,6 +35,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
 async function signIn(data: SignInData) {
   try {
+    console.log(data)
     const response = await axios.post(
       "https://receita-que-doi-menos-server.up.railway.app/auth/login",
       data,
