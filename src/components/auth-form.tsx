@@ -1,20 +1,23 @@
-"use client";
-
-import { useContext, useEffect, useState } from "react";
+"use client"
+import { useContext, useState } from "react";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleNotch } from "@phosphor-icons/react";
 import Link from "next/link";
+import { setCookie, parseCookies } from 'nookies'
 
 import { cn } from "@/lib/utils";
-import { LocalStorageUtils } from "@/utils/local-storage";
-import { LocalStorageKeys } from "@/utils/enums/local-storage-keys.enum";
+
 
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { AuthContext } from "@/contexts/AuthContext";
+import { useRouter } from "next/navigation";
+
+
+import axios from "axios";
+import jwt from "jsonwebtoken";
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -37,24 +40,34 @@ export function AuthForm({ className, ...props }: UserAuthFormProps) {
   });
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const { signIn } = useContext(AuthContext);
+  const router = useRouter();
 
-  const onSubmit: SubmitHandler<Auth> = (data) => {
+  const onSubmit: SubmitHandler<Auth> = async (data) => {
     setIsSubmitting(true);
 
-    // Armazenando email do usuário "autenticado" no LocalStorage
-    LocalStorageUtils.storage(
-      LocalStorageKeys.USER_AUTHENTICATED_EMAIL,
-      data.email,
-    );
-    // console.log(data)
-    // Fake loading
-    // setTimeout(() => {
-    //   setIsSubmitting(false);
-    //   router.push("/home");
-    // }, 1500);
+    try {
+      const response = await axios.post(
+        "https://receita-que-doi-menos-server.up.railway.app/auth/login",
+        data,
+      );
+  
+      const { access_token } = response.data;
+  
+      setCookie(undefined, 'acess_token', access_token, {
+        maxAge: 60 * 60 * 1, // 1 hour
+      })
+  
+      if (response.status === 200) {
+        await router.push("/home")
+        setIsSubmitting(false)
+      }  
+    }
+    catch {
+      window.alert("AQUI NÃO")
+      setIsSubmitting(false)
+    }
 
-    signIn(data)
+
   };
 
   return (
