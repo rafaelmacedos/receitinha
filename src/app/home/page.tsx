@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import receitinhalogo from "../../assets/img/receitinha-logo-home.png";
 import { SearchBar } from "@/components/searchbar";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
 
       <div className="h-full w-[650px] bg-[url('/hand.png')]">
         <h1>direita</h1>
+        <Button>Button</Button>
       </div>
     </div>
   );
