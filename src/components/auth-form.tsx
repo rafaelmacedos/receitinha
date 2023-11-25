@@ -1,20 +1,18 @@
-"use client"
+"use client";
 import { useContext, useState } from "react";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleNotch } from "@phosphor-icons/react";
 import Link from "next/link";
-import { setCookie, parseCookies } from 'nookies'
-
+import { setCookie, parseCookies } from "nookies";
+import { JwtPayload } from "jsonwebtoken";
 import { cn } from "@/lib/utils";
-
 
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
-
 
 import axios from "axios";
 import jwt from "jsonwebtoken";
@@ -44,30 +42,33 @@ export function AuthForm({ className, ...props }: UserAuthFormProps) {
 
   const onSubmit: SubmitHandler<Auth> = async (data) => {
     setIsSubmitting(true);
-
     try {
       const response = await axios.post(
         "https://receita-que-doi-menos-server.up.railway.app/auth/login",
         data,
       );
-  
-      const { access_token } = response.data;
-  
-      setCookie(undefined, 'acess_token', access_token, {
-        maxAge: 60 * 60 * 1, // 1 hour
-      })
-  
+
+      const { access_token, refresh_token } = response.data;
+
+      const decodedAcessToken = jwt.decode(access_token) as JwtPayload;
+      const decodedRefreshToken = jwt.decode(refresh_token) as JwtPayload;
+
+      setCookie(undefined, "access_token", access_token, {
+        maxAge: decodedAcessToken.exp, 
+      });
+
+      setCookie(undefined, "refresh_token", refresh_token, {
+        maxAge: decodedRefreshToken.exp, 
+      });
+
       if (response.status === 200) {
-        await router.push("/home")
-        setIsSubmitting(false)
-      }  
+        await router.push("/home");
+        setIsSubmitting(false);
+      }
+    } catch {
+      window.alert("Falha ao realizar login");
+      setIsSubmitting(false);
     }
-    catch {
-      window.alert("AQUI NÃO")
-      setIsSubmitting(false)
-    }
-
-
   };
 
   return (
@@ -138,14 +139,14 @@ export function AuthForm({ className, ...props }: UserAuthFormProps) {
       </div>
 
       <div className="flex items-center justify-center">
-      <Link href="/register">
-        <Button
-          className="w-64 bg-blue-600 text-white hover:bg-blue-800 hover:text-white"
-          variant="outline"
-          type="button"
-        >
-          Comece agora
-        </Button>
+        <Link href="/register">
+          <Button
+            className="w-64 bg-blue-600 text-white hover:bg-blue-800 hover:text-white"
+            variant="outline"
+            type="button"
+          >
+            Comece agora
+          </Button>
         </Link>
       </div>
     </div>

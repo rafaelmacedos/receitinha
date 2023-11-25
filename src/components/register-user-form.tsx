@@ -15,17 +15,20 @@ import { LocalStorageKeys } from "@/utils/enums/local-storage-keys.enum";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import axios from "axios";
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
 export function RegisterUserForm({ className, ...props }: UserAuthFormProps) {
   const authSchema = z.object({
+    name: z.string().min(3, "Digite um nome válido"),
     email: z.string().min(1, "E-mail é obrigatório").email("E-mail inválido"),
     password: z
       .string()
       .min(1, "Senha é obrigatória")
       .min(6, "A senha deve conter no mínimo 6 caracteres"),
   });
+
   type Auth = z.infer<typeof authSchema>;
 
   const {
@@ -40,20 +43,24 @@ export function RegisterUserForm({ className, ...props }: UserAuthFormProps) {
 
   const router = useRouter();
 
-  const onSubmit: SubmitHandler<Auth> = (data) => {
+  const onSubmit: SubmitHandler<Auth> = async (data) => {
     setIsSubmitting(true);
+    console.log(data)
+    try {
+      const response = await axios.post(
+        "https://receita-que-doi-menos-server.up.railway.app/auth/register",
+        data,
+      );
 
-    // Armazenando email do usuário "autenticado" no LocalStorage
-    LocalStorageUtils.storage(
-      LocalStorageKeys.USER_AUTHENTICATED_EMAIL,
-      data.email,
-    );
-
-    // Fake loading
-    setTimeout(() => {
+      if (response.status === 201) {
+        window.alert("Usuário cadastrado com sucesso!");
+        await router.push("/login");
+        setIsSubmitting(false);
+      }
+    } catch {
+      window.alert("Falha ao realizar cadastro");
       setIsSubmitting(false);
-      router.push("/products");
-    }, 1500);
+    }
   };
 
   return (
@@ -65,6 +72,27 @@ export function RegisterUserForm({ className, ...props }: UserAuthFormProps) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-2">
           <div className="grid gap-1">
+            <div className="text-lg">
+              <Label htmlFor="name" className="text-lg">
+                Nome completo <span className="text-red-500">*</span>
+              </Label>
+              <Input
+                id="name"
+                placeholder="Digite seu nome completo"
+                type="text"
+                autoCapitalize="none"
+                autoComplete="name"
+                autoCorrect="off"
+                {...register("name")}
+              />
+
+              {errors.name && (
+                <span className="text-sm text-red-500">
+                  {errors.name?.message}
+                </span>
+              )}
+            </div>
+
             <Label htmlFor="email" className="text-lg">
               E-mail <span className="text-red-500">*</span>
             </Label>
@@ -90,20 +118,6 @@ export function RegisterUserForm({ className, ...props }: UserAuthFormProps) {
             <Input
               id="password"
               placeholder="Digite sua senha"
-              type="password"
-              {...register("password")}
-            />
-            {errors.password && (
-              <span className="text-sm text-red-500">
-                {errors.password?.message}
-              </span>
-            )}
-            <Label htmlFor="confirm-password" className="text-lg">
-              Confirme sua Senha <span className="text-red-500">*</span>
-            </Label>
-            <Input
-              id="confirm-password"
-              placeholder="Confirme sua senha"
               type="password"
               {...register("password")}
             />
