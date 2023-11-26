@@ -36,7 +36,6 @@ export default function Home() {
         <div className="flex h-[270px] w-full items-center justify-center">
           <div className="">
             <Image src={receitinhalogo} className="mr-20" alt="Receitinha Logo" />
-            <h1>Olá {username}</h1>
           </div>
           <div className="">
             <SearchBar className="" />
@@ -98,6 +97,10 @@ export default function Home() {
       </div>
 
       <div className="relative h-full w-[650px] bg-[url('/hand.png')]">
+        <div className="flex items-end justify-end mr-14 mt-2">
+          <span className="self-end text-lg font-bold">Olá, {username}!</span>
+        </div>
+        
         <Button className="h-12 w-60 bg-white hover:bg-green-500 text-md absolute top-10 right-11">Adicionar nova receita</Button>
         <Button className="h-11 w-50 bg-green-200 hover:bg-green-500 text-md absolute top-24 right-11">Configurações</Button>
       </div>
