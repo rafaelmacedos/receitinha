@@ -9,8 +9,6 @@ import { CircleNotch } from "@phosphor-icons/react";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
-import { LocalStorageUtils } from "@/utils/local-storage";
-import { LocalStorageKeys } from "@/utils/enums/local-storage-keys.enum";
 
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
@@ -26,7 +24,8 @@ export function RegisterUserForm({ className, ...props }: UserAuthFormProps) {
     password: z
       .string()
       .min(1, "Senha é obrigatória")
-      .min(6, "A senha deve conter no mínimo 6 caracteres"),
+      .min(8, "A senha deve conter no mínimo 8 caracteres")
+      .max(12, "A senha deve conter no máximo 12 caracteres"),
   });
 
   type Auth = z.infer<typeof authSchema>;
