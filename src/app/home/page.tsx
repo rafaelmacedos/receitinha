@@ -85,11 +85,13 @@ export default function Home() {
           
           <div className="p-9 flex items-center gap-10">
 
-            <div className="h-[180px] w-[370px] rounded-[70px] bg-white"></div>
-            <div className="h-[180px] w-[370px] rounded-[70px] bg-white"></div>
-            <div className="h-[180px] w-[370px] rounded-[70px] bg-white"></div>
+            <div className="h-[180px] w-[370px] rounded-[70px] bg-[url('/vaca-atolada.jpg')]">
+              <span className="text-[27px] font-bold text-white">Vaca atolada</span>
+              <span className="text-[17px] font-bold text-gray-500">por Ramon Montenegro</span>
+            </div>
 
             <Button className=" h-50 w-50 rounded-[100%] bg-white text-5xl" >+</Button>
+
           </div>
 
         </div>
@@ -97,15 +99,12 @@ export default function Home() {
       </div>
 
       <div className="relative h-full w-[650px] bg-[url('/hand.png')]">
-        <div className="flex items-end justify-end mr-14 mt-2">
+        <div className="flex items-end justify-end m-12">
           <span className="self-end text-lg font-bold">Olá, {username}!</span>
         </div>
-        
-        <Button className="h-12 w-60 bg-white hover:bg-green-500 text-md absolute top-10 right-11">Adicionar nova receita</Button>
-        <Button className="h-11 w-50 bg-green-200 hover:bg-green-500 text-md absolute top-24 right-11">Configurações</Button>
+        <Button className="h-12 w-60 bg-white hover:bg-green-500 text-md absolute top-24 right-12">Adicionar nova receita</Button>
+        <Button className="h-11 w-50 bg-green-200 hover:bg-green-500 text-md absolute top-40 right-12">Configurações</Button>
       </div>
     </div>
   );
 }
-
-
