@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/toaster";
 
 import "./globals.css";
-import NexAuthSessionProvider from "@/providers/sessionProvider";
 
 const baloo2 = Baloo_2({ subsets: ["latin"] });
 
