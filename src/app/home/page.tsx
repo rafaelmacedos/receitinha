@@ -105,10 +105,12 @@ export default function Home() {
           </div>
         </div>
 
-        <div>
-          <span className="p-10 text-2xl font-bold">Enviados Recentemente</span>
+        <div className="border-2">
 
-          <div className="flex items-center gap-10 p-9">
+          <span className="p-10 text-2xl font-bold border-2">Enviados Recentemente</span>
+
+          <div className="flex items-center gap-10 p-9 border-2">
+
             <div className="h-[180px] w-[370px] rounded-[70px] bg-[url('/vaca-atolada.jpg')]">
               <span className="text-[27px] font-bold text-white">
                 Vaca atolada
@@ -123,8 +125,7 @@ export default function Home() {
                 <span className="mt-[4px]">+</span>
               </Button>
             </Link>
-
-
+            
           </div>
         </div>
       </div>
