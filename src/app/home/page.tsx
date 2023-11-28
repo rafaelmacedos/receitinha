@@ -32,7 +32,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="container relative flex h-screen items-center justify-center bg-zinc-200 bg-opacity-40 lg:max-w-none lg:grid-cols-2 lg:px-0">
+    <div className="container relative flex h-screen items-center justify-center overflow-hidden bg-zinc-200 bg-opacity-40 lg:max-w-none lg:grid-cols-2 lg:px-0">
       <div className="h-full w-3/4">
         <div className="flex h-[270px] w-full items-center justify-center">
           <Link href="/home" className="">
@@ -48,7 +48,7 @@ export default function Home() {
         </div>
 
         <div>
-          <span className="p-10 text-2xl font-bold">Mais Populares</span>
+          <span className="p-10 text-3xl font-bold">Mais Populares</span>
 
           <div className="flex items-center gap-10 p-10">
             <div className="h-[250px] w-[180px] cursor-pointer rounded-[100px] bg-white text-center hover:bg-yellow-400">
@@ -97,20 +97,21 @@ export default function Home() {
             </div>
 
             <Link href="/recipes">
-              <Button type="button" variant="outline" className="h-16 w-16 rounded-full bg-white text-5xl">
+              <Button
+                type="button"
+                variant="outline"
+                className="h-16 w-16 rounded-full bg-white text-5xl"
+              >
                 <span className="mt-[4px]">+</span>
               </Button>
             </Link>
-
           </div>
         </div>
 
-        <div className="border-2">
+        <div>
+          <span className="p-10 text-3xl font-bold">Enviados Recentemente</span>
 
-          <span className="p-10 text-2xl font-bold border-2">Enviados Recentemente</span>
-
-          <div className="flex items-center gap-10 p-9 border-2">
-
+          <div className="flex items-center gap-10 p-9">
             <div className="h-[180px] w-[370px] rounded-[70px] bg-[url('/vaca-atolada.jpg')]">
               <span className="text-[27px] font-bold text-white">
                 Vaca atolada
@@ -119,13 +120,16 @@ export default function Home() {
                 por Ramon Montenegro
               </span>
             </div>
-            
+
             <Link href="/recipes">
-              <Button type="button" variant="outline" className="h-16 w-16 rounded-full bg-white text-5xl">
+              <Button
+                type="button"
+                variant="outline"
+                className="h-16 w-16 rounded-full bg-white text-5xl"
+              >
                 <span className="mt-[4px]">+</span>
               </Button>
             </Link>
-            
           </div>
         </div>
       </div>
@@ -134,10 +138,10 @@ export default function Home() {
         <div className="m-12 flex items-end justify-end">
           <span className="self-end text-lg font-bold">Olá, {username}!</span>
         </div>
-        <Button className="text-md absolute right-12 top-24 h-12 w-60 bg-white hover:bg-green-500">
+        <Button className="text-md absolute right-12 top-24 h-12 w-60 rounded-full bg-white hover:bg-green-500 hover:text-white">
           Adicionar nova receita
         </Button>
-        <Button className="w-50 text-md absolute right-12 top-40 h-11 bg-green-200 hover:bg-green-500">
+        <Button className="w-50 text-md absolute right-12 top-40 h-11 rounded-full bg-gray-700 text-white hover:bg-blue-700 ">
           Configurações
         </Button>
       </div>

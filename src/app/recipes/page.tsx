@@ -72,42 +72,39 @@ export default function Recipes() {
         </div>
 
         <div>
-          <span className="p-10 text-2xl font-bold">Todas as receitas</span>
+          <span className="p-10 text-3xl font-bold">Todas as receitas</span>
 
-          <div className="flex items-center gap-10">
-            <div className="grid place-items-center">
-              <Triangle
-                height="48"
-                width="48"
-                color="#3B82F6"
-                ariaLabel="triangle-loading"
-                visible={isLoading}
-              />
+          <div className="flex items-center gap-10 p-10">
+            <Triangle
+              height="82"
+              width="82"
+              color="#FFD900"
+              ariaLabel="triangle-loading"
+              visible={isLoading}
+            />
 
-              {!isLoading && (
-                <div className="flex items-center gap-10 p-10">
-                  {recipes.map((recipe) => (
-                    <div
-                      key={recipe.id}
-                      className="h-[250px] w-[180px] rounded-[100px] bg-white text-center hover:bg-green-400"
-                    >
-                      <Image
-                        className="h-[180px] w-[180px] rounded-[100px] p-5"
-                        src={recipe.photo}
-                        alt=""
-                        width={180}
-                        height={180}
-                      />
-                      <span className="text-lg font-bold">{recipe.name}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <Button className=" h-50 w-50 rounded-[100%] bg-white text-5xl">
-              +
-            </Button>
+            {!isLoading && (
+              <div className="flex items-center gap-10">
+                {recipes.map((recipe) => (
+                  <div
+                    key={recipe.id}
+                    className="h-[250px] w-[180px] rounded-[100px] bg-white text-center hover:bg-green-400"
+                  >
+                    <Image
+                      className="h-[180px] w-[180px] rounded-[100px] p-5"
+                      src={recipe.photo}
+                      alt=""
+                      width={180}
+                      height={180}
+                    />
+                    <span className="text-lg font-bold">{recipe.name}</span>
+                  </div>
+                ))}
+                <Button className=" h-50 w-50 rounded-[100%] bg-white text-5xl">
+                  +
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>
