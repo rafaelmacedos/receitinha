@@ -32,7 +32,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="container relative flex h-screen items-center justify-center bg-zinc-200 bg-opacity-40 lg:max-w-none lg:grid-cols-2 lg:px-0">
+    <div className="container relative flex h-screen items-center justify-center bg-zinc-200 bg-opacity-40 lg:max-w-none lg:grid-cols-2 lg:px-0 overflow-hidden">
       <div className="h-full w-3/4">
         <div className="flex h-[270px] w-full items-center justify-center">
           <Link href="/home" className="">
@@ -48,7 +48,7 @@ export default function Home() {
         </div>
 
         <div>
-          <span className="p-10 text-2xl font-bold">Mais Populares</span>
+          <span className="p-10 text-3xl font-bold">Mais Populares</span>
 
           <div className="flex items-center gap-10 p-10">
             <div className="h-[250px] w-[180px] cursor-pointer rounded-[100px] bg-white text-center hover:bg-yellow-400">
@@ -106,7 +106,7 @@ export default function Home() {
         </div>
 
         <div>
-          <span className="p-10 text-2xl font-bold">Enviados Recentemente</span>
+          <span className="p-10 text-3xl font-bold">Enviados Recentemente</span>
 
           <div className="flex items-center gap-10 p-9">
             <div className="h-[180px] w-[370px] rounded-[70px] bg-[url('/vaca-atolada.jpg')]">
