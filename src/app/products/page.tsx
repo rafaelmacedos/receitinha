@@ -1,27 +1,28 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import { Triangle } from 'react-loader-spinner'
+import { useEffect, useState } from "react";
+import { Triangle } from "react-loader-spinner";
 
-import { Header } from '@/components/header'
-import { NoProducts } from '@/components/no-products'
-import { ProductsList } from '@/components/products-list'
-import { RegisterProductAlert } from '@/components/register-product-alert'
+import { Header } from "@/components/header";
+import { NoProducts } from "@/components/no-products";
+import { ProductsList } from "@/components/products-list";
+import { RegisterProductAlert } from "@/components/register-product-alert";
 
-import { api } from '@/lib/api'
+import { api } from "@/lib/api";
 
-import { Product } from '@/models/product.model'
+import { Product } from "@/models/product.model";
 
 export default function Products() {
-  const [products, setProducts] = useState<Product[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    api.get('/products').then((response) => {
-      setProducts(response.data)
-      setIsLoading(false)
-    })
-  }, [])
+    api.get("/meals/all").then((response) => {
+      setProducts(response.data);
+      setIsLoading(false);
+      console.log(response);
+    });
+  }, []);
 
   return (
     <div className="flex h-screen w-full flex-col">
@@ -51,5 +52,5 @@ export default function Products() {
         )}
       </main>
     </div>
-  )
+  );
 }
