@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { parseCookies } from "nookies";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import axios from "axios";
 
 interface DecodedToken {
   iss?: string;
@@ -18,17 +19,56 @@ interface DecodedToken {
   exp?: number;
 }
 
+interface Recipe {
+  id: string;
+  name: string;
+  typeMeal: "BREAKFAST" | "DINNER" | "LUNCH" | "FASTFOOD" | "DESSERT" | null;
+  photo: string;
+  video: string | null;
+  ingredients: string[] | null;
+  instructions: string;
+  creator: {
+    id: string;
+    name: string;
+    email: string;
+  };
+}
+
 export default function Home() {
   const [username, setUsername] = useState<string | null>(null);
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const router = useRouter();
 
   useEffect(() => {
     const cookies = parseCookies();
+    const authToken = cookies.access_token;
 
     const decodedToken = jwt.decode(cookies.access_token) as DecodedToken;
     const username = decodedToken?.user_name || "Nome de Usuário Padrão";
 
     setUsername(username);
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    };
+
+    axios
+      .get(
+        "https://receita-que-doi-menos-server.up.railway.app/meals/all",
+        config,
+      )
+      .then((response) => {
+        setRecipes(response.data);
+        setIsLoading(false);
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   return (

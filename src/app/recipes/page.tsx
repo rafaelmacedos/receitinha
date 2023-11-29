@@ -11,6 +11,14 @@ import jwt from "jsonwebtoken";
 import { Triangle } from "react-loader-spinner";
 import Link from "next/link";
 
+interface DecodedToken {
+  iss?: string;
+  user_id?: string;
+  user_name?: string;
+  sub?: string;
+  exp?: number;
+}
+
 interface Recipe {
   id: string;
   name: string;
@@ -27,12 +35,20 @@ interface Recipe {
 }
 
 export default function Recipes() {
+  const [username, setUsername] = useState<string | null>(null);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+
+  
   useEffect(() => {
     const cookies = parseCookies();
     const authToken = cookies.access_token;
+
+    const decodedToken = jwt.decode(cookies.access_token) as DecodedToken;
+    const username = decodedToken?.user_name || "Nome de Usuário Padrão";
+  
+    setUsername(username);
 
     const config = {
       headers: {
@@ -111,7 +127,7 @@ export default function Recipes() {
 
       <div className="relative h-full w-[650px] bg-[url('/hand.png')]">
         <div className="m-12 flex items-end justify-end">
-          <span className="self-end text-lg font-bold">Olá, username!</span>
+          <span className="self-end text-lg font-bold">Olá, {username}!</span>
         </div>
         <Button className="text-md absolute right-12 top-24 h-12 w-60 rounded-full bg-white hover:bg-green-500 hover:text-white">
           Adicionar nova receita
