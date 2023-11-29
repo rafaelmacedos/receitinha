@@ -13,12 +13,12 @@ import Link from "next/link";
 
 interface Recipe {
   id: string;
-  name: string;
-  typeMeal: "BREAKFAST" | "DINNER" | "LUNCH" | "FASTFOOD" | "DESSERT";
-  photo: string;
-  video: string;
-  ingredients: string[];
-  instructions: string;
+  name: string | null;
+  typeMeal: "BREAKFAST" | "DINNER" | "LUNCH" | "FASTFOOD" | "DESSERT" | null;
+  photo: string | null;
+  video: string | null;
+  ingredients: string[]| null;
+  instructions: string| null;
   creator: {
     id: string;
     name: string;
