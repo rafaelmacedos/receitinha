@@ -13,12 +13,12 @@ import Link from "next/link";
 
 interface Recipe {
   id: string;
-  name: string | null;
+  name: string;
   typeMeal: "BREAKFAST" | "DINNER" | "LUNCH" | "FASTFOOD" | "DESSERT" | null;
-  photo: string | null;
+  photo: string;
   video: string | null;
-  ingredients: string[]| null;
-  instructions: string| null;
+  ingredients: string[] | null;
+  instructions: string;
   creator: {
     id: string;
     name: string;
@@ -92,7 +92,7 @@ export default function Recipes() {
                   >
                     <Image
                       className="h-[180px] w-[180px] rounded-[100px] p-5"
-                      src={recipe.photo}
+                      src={recipe.photo ? recipe.photo : `/unavailable.jpg`}
                       alt=""
                       width={180}
                       height={180}
@@ -110,7 +110,7 @@ export default function Recipes() {
       </div>
 
       <div className="relative h-full w-[650px] bg-[url('/hand.png')]">
-      <div className="m-12 flex items-end justify-end">
+        <div className="m-12 flex items-end justify-end">
           <span className="self-end text-lg font-bold">Olá, username!</span>
         </div>
         <Button className="text-md absolute right-12 top-24 h-12 w-60 rounded-full bg-white hover:bg-green-500 hover:text-white">
