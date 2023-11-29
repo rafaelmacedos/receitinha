@@ -14,10 +14,10 @@ import Link from "next/link";
 interface Recipe {
   id: string;
   name: string;
-  typeMeal: "BEEF" | "GOAT" | "CHICKEN" | "BREAKFAST" | "DESSERT";
+  typeMeal: "BREAKFAST" | "DINNER" | "LUNCH" | "FASTFOOD" | "DESSERT" | null;
   photo: string;
-  video: string;
-  ingredients: string[];
+  video: string | null;
+  ingredients: string[] | null;
   instructions: string;
   creator: {
     id: string;
@@ -92,7 +92,7 @@ export default function Recipes() {
                   >
                     <Image
                       className="h-[180px] w-[180px] rounded-[100px] p-5"
-                      src={recipe.photo}
+                      src={recipe.photo ? recipe.photo : `/unavailable.jpg`}
                       alt=""
                       width={180}
                       height={180}
@@ -110,14 +110,13 @@ export default function Recipes() {
       </div>
 
       <div className="relative h-full w-[650px] bg-[url('/hand.png')]">
-        <div className="mr-14 mt-2 flex items-end justify-end">
-          <span className="self-end text-lg font-bold">Olá, !</span>
+        <div className="m-12 flex items-end justify-end">
+          <span className="self-end text-lg font-bold">Olá, username!</span>
         </div>
-
-        <Button className="text-md absolute right-11 top-10 h-12 w-60 bg-white hover:bg-green-500">
+        <Button className="text-md absolute right-12 top-24 h-12 w-60 rounded-full bg-white hover:bg-green-500 hover:text-white">
           Adicionar nova receita
         </Button>
-        <Button className="w-50 text-md absolute right-11 top-24 h-11 bg-green-200 hover:bg-green-500">
+        <Button className="w-50 text-md absolute right-12 top-40 h-11 rounded-full bg-gray-700 text-white hover:bg-blue-700 ">
           Configurações
         </Button>
       </div>

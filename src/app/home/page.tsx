@@ -51,10 +51,11 @@ export default function Home() {
           <span className="p-10 text-3xl font-bold">Mais Populares</span>
 
           <div className="flex items-center gap-10 p-10">
+            
             <div className="h-[250px] w-[180px] cursor-pointer rounded-[100px] bg-white text-center hover:bg-yellow-400">
               <img
                 className="h-[180px] w-[180px] p-5"
-                src="card-receita-1.png"
+                src="card-receita-1.png" 
                 alt=""
               />
               <span className="text-lg font-bold">Café da Manhã</span>
@@ -108,10 +109,10 @@ export default function Home() {
           </div>
         </div>
 
-        <div>
+        <div className="border-2">
           <span className="p-10 text-3xl font-bold">Enviados Recentemente</span>
 
-          <div className="flex items-center gap-10 p-9">
+          <div className="flex items-center gap-10 p-9 border-2">
             <div className="h-[180px] w-[370px] rounded-[70px] bg-[url('/vaca-atolada.jpg')]">
               <span className="text-[27px] font-bold text-white">
                 Vaca atolada
@@ -130,6 +131,7 @@ export default function Home() {
                 <span className="mt-[4px]">+</span>
               </Button>
             </Link>
+
           </div>
         </div>
       </div>
