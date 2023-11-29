@@ -24,7 +24,7 @@ export function SearchBar() {
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>Fruits</SelectLabel>
+              <SelectLabel>Filtros</SelectLabel>
               <SelectItem className="text-base" value="apple">Café da Manhã</SelectItem>
               <SelectItem className="text-base" value="banana">Almoço</SelectItem>
               <SelectItem className="text-base" value="blueberry">Janta</SelectItem>

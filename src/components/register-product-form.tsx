@@ -51,7 +51,7 @@ export function RegisterProductForm() {
 
   const onSubmit: SubmitHandler<ProductType> = async (data) => {
     await api
-      .post('/products', data)
+      .post('/meals', data)
       .then(() => {
         reset()
         toast({
@@ -75,13 +75,14 @@ export function RegisterProductForm() {
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex flex-col gap-2.5">
-        <Label htmlFor="name">
-          Nome <span className="text-red-500">*</span>
+        <Label htmlFor="name" className='text-lg'>
+          Nome da receita <span className="text-red-500">*</span>
         </Label>
         <Input
           id="name"
           placeholder="Galaxy A51, Macbook Pro, Bolo de chocolate, Canela de véi, etc..."
           type="text"
+          className='text-sm'
           {...register('name')}
         />
 
@@ -93,7 +94,7 @@ export function RegisterProductForm() {
       </div>
 
       <div className="flex flex-col gap-2.5">
-        <Label htmlFor="phoneNumber">
+        <Label htmlFor="phoneNumber" className='text-lg'>
           Telefone para contato <span className="text-red-500">*</span>
         </Label>
         <Input
@@ -116,7 +117,7 @@ export function RegisterProductForm() {
       </div>
 
       <div className="flex flex-col gap-2.5">
-        <Label htmlFor="description">Descrição</Label>
+        <Label htmlFor="description" className='text-lg'>Descrição</Label>
         <Textarea
           className="h-24 resize-none"
           placeholder="Celular ótimo, pouco tempo de uso, conta com 4GB de RAM e 128GB de armazenamento..."
@@ -136,7 +137,7 @@ export function RegisterProductForm() {
       </div>
 
       <div className="flex flex-col gap-2.5">
-        <Label htmlFor="price">
+        <Label htmlFor="price" className='text-lg'>
           Preço <span className="text-red-500">*</span>
         </Label>
         <Input
@@ -155,7 +156,7 @@ export function RegisterProductForm() {
       </div>
 
       <div className="flex flex-col gap-2.5">
-        <Label htmlFor="imgUrl">URL da foto do produto</Label>
+        <Label htmlFor="imgUrl" className='text-lg'>URL da foto da receita</Label>
         <Input
           id="imgUrl"
           placeholder="https://..."
@@ -174,7 +175,7 @@ export function RegisterProductForm() {
         </p>
       </div>
 
-      <Button className="w-fit">Salvar e anunciar</Button>
+      <Button className="w-fit text-lg">Salvar e anunciar</Button>
     </form>
   )
 }
