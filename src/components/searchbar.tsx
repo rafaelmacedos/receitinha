@@ -15,11 +15,9 @@ import {
 
 export function SearchBar() {
   return (
-    <div className="card flex h-32 w-[800px] items-center justify-center rounded-[45px] bg-white">
-      <div className="w-1/5">
-        {" "}
+    <div className="w-[800px] py-6 px-6 flex flex-wrap items-center rounded-[16px] bg-white gap-4 rounded-se-[60px] rounded-es-[60px] rounded-ss-[30px] rounded-ee-[30px]">
         <Select>
-          <SelectTrigger className="w-[150px] h-12 text-base rounded-full">
+          <SelectTrigger className="min-w-[100px] flex-1 flex-shrink-0 h-12 text-base rounded-full">
             <SelectValue placeholder="Filtros" />
           </SelectTrigger>
           <SelectContent>
@@ -33,13 +31,14 @@ export function SearchBar() {
             </SelectGroup>
           </SelectContent>
         </Select>
-      </div>
-      <div className="w-2/4">
-        <div className="static flex w-full max-w-sm items-center space-x-2">
-          <Input className="h-12 w-96 text-base rounded-full" type="text" placeholder="Procurar receita de hoje" />
-          <Button className="h-12 w-44 bg-green-500 text-lg text-white hover:bg-green-600 rounded-full" type="submit">Buscar</Button>
+
+        <Input className="w-[240px] flex-1 flex-shrink- h-12 text-base rounded-[16px]" type="text" placeholder="Procurar receita de hoje"/>
+
+        <Button className="max-w-[180px] h-12 flex-1 flex-shrink-0 bg-green-500 text-lg text-white hover:bg-green-600 rounded-[16px] rounded-se-[60px] rounded-es-[60px] rounded-ss-[30px] rounded-ee-[30px]" type="submit">Buscar</Button>
+      {/* <div className="">
+        <div className="flex-1 flex-shrink-0 w-40 items-center gap-4">
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
