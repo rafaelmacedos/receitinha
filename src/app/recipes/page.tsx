@@ -10,6 +10,7 @@ import { parseCookies } from "nookies";
 import jwt from "jsonwebtoken";
 import { Triangle } from "react-loader-spinner";
 import Link from "next/link";
+import "./styles.css";
 
 interface DecodedToken {
   iss?: string;
@@ -39,15 +40,13 @@ export default function Recipes() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-
-  
   useEffect(() => {
     const cookies = parseCookies();
     const authToken = cookies.access_token;
 
     const decodedToken = jwt.decode(cookies.access_token) as DecodedToken;
     const username = decodedToken?.user_name || "Nome de Usuário Padrão";
-  
+
     setUsername(username);
 
     const config = {
@@ -72,7 +71,7 @@ export default function Recipes() {
   }, []);
 
   return (
-    <div className="container relative flex h-screen items-center justify-center bg-zinc-200 bg-opacity-40 lg:max-w-none lg:grid-cols-2 lg:px-0">
+    <div className="container relative flex h-screen items-center justify-center p-4 lg:max-w-none lg:grid-cols-2 lg:px-0">
       <div className="h-full w-3/4">
         <div className="flex h-[270px] w-full items-center justify-center">
           <Link href="/home" className="">
@@ -100,32 +99,36 @@ export default function Recipes() {
             />
 
             {!isLoading && (
-              <div className="flex items-center gap-10">
+              <section className="flex flex-wrap items-center justify-start gap-x-4 gap-y-8 py-8">
                 {recipes.map((recipe) => (
                   <div
                     key={recipe.id}
-                    className="h-[250px] w-[180px] rounded-[100px] bg-white text-center hover:bg-green-400"
+                    className="flex h-[180px] min-w-[335px] max-w-[350px] flex-col justify-end rounded-ee-[30px] rounded-es-[60px] rounded-se-[60px] rounded-ss-[30px] bg-cover bg-clip-border bg-center p-6"
+                    style={{
+                      backgroundImage: `url(${
+                        recipe.photo ? recipe.photo : "/unavailable.jpg"
+                      })`,
+                    }}
                   >
-                    <Image
-                      className="h-[180px] w-[180px] rounded-[100px] p-5"
-                      src={recipe.photo ? recipe.photo : `/unavailable.jpg`}
-                      alt=""
-                      width={180}
-                      height={180}
-                    />
-                    <span className="text-lg font-bold">{recipe.name}</span>
+                    <div className="w-fit rounded-[4px] bg-green-500 px-2">
+                      <span className="text-[24px] font-bold text-white">
+                        {recipe.name}
+                      </span>
+                    </div>
+                    <div className="w-fit bg-yellow-500 px-2">
+                      <span className="text-[16px] font-medium text-white">
+                        {recipe.creator.name}
+                      </span>
+                    </div>
                   </div>
                 ))}
-                <Button className=" h-50 w-50 rounded-[100%] bg-white text-5xl">
-                  +
-                </Button>
-              </div>
+              </section>
             )}
           </div>
         </div>
       </div>
 
-      <div className="relative h-full w-[650px] bg-[url('/hand.png')]">
+      <div className="relative h-full w-[650px]">
         <div className="m-12 flex items-end justify-end">
           <span className="self-end text-lg font-bold">Olá, {username}!</span>
         </div>

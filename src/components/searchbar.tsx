@@ -15,9 +15,9 @@ import {
 
 export function SearchBar() {
   return (
-    <div className="w-[800px] py-6 px-6 flex flex-wrap items-center rounded-[16px] bg-white gap-4 rounded-se-[60px] rounded-es-[60px] rounded-ss-[30px] rounded-ee-[30px]">
+    <div className="w-[700px] p-6 flex flex-wrap items-center rounded-[16px] bg-white gap-4 rounded-se-[60px] rounded-es-[60px] rounded-ss-[30px] rounded-ee-[30px]">
         <Select>
-          <SelectTrigger className="min-w-[100px] flex-1 flex-shrink-0 h-12 text-base rounded-full">
+          <SelectTrigger className="w-[100px] flex-1 flex-shrink-0 h-12 text-base rounded-full">
             <SelectValue placeholder="Filtros" />
           </SelectTrigger>
           <SelectContent>

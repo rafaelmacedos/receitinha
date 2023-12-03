@@ -3,7 +3,15 @@
 import { Header } from '@/components/header'
 import { RegisterProductForm } from '@/components/register-product-form'
 
-export default function RegisterProduct() {
+interface DecodedToken {
+  iss?: string;
+  user_id?: string;
+  user_name?: string;
+  sub?: string;
+  exp?: number;
+}
+
+export default function RegisterProduct() {  
   return (
     <div className="flex h-screen w-full flex-col">
       <Header showSearchBar={false} />
