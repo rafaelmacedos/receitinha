@@ -6,7 +6,7 @@ import { SearchBar } from "@/components/searchbar";
 import { Button } from "@/components/ui/button";
 import jwt from "jsonwebtoken";
 import { useEffect, useState } from "react";
-import { parseCookies } from "nookies";
+import { parseCookies, destroyCookie } from "nookies";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import axios from "axios";
@@ -106,6 +106,12 @@ export default function Home() {
       });
   }, []);
 
+  const logout = () => {
+    destroyCookie(null, "access_token");
+    destroyCookie(null, "refresh_token");
+    router.push("/login");
+  };
+
   return (
     //Container Principal
     <div className="flex h-screen w-full max-w-[1600px] items-start justify-center p-4">
@@ -151,7 +157,7 @@ export default function Home() {
           </section>
         </section>
 
-        <div className="my-4 h-full w-full p-4 flex justify-around gap-4">
+        <div className="my-4 flex h-full w-full justify-around gap-4 p-4">
           <Link href="/register-product" className="w-fit">
             <Button
               type="button"
@@ -173,7 +179,7 @@ export default function Home() {
         </div>
 
         {/* ENVIADOS RECENTEMENTE */}
-        <div className="">
+        <div>
           <span className="block text-left text-3xl font-bold">
             Enviados Recentemente
           </span>
@@ -201,16 +207,6 @@ export default function Home() {
               </div>
             ))}
           </section>
-
-          {/* <Link href="/recipes">
-            <Button
-              type="button"
-              variant="outline"
-              className="h-16 w-16 rounded-full bg-white text-5xl"
-            >
-              <span className="mt-[4px]">+</span>
-            </Button>
-          </Link> */}
         </div>
       </div>
       {/* Hand Container */}
@@ -222,8 +218,11 @@ export default function Home() {
         <Button className="text-md right-12 top-24 mb-4 h-12 w-60 rounded-full bg-white font-normal hover:bg-green-500 hover:text-white">
           Adicionar nova receita
         </Button>
-        <Button className="w-50 text-md right-12 top-40 h-11 rounded-full bg-gray-400 font-normal text-white hover:bg-blue-700 ">
-          Configurações
+        <Button
+          className="w-50 text-md right-12 top-40 h-11 rounded-full bg-gray-400 font-normal text-white hover:bg-blue-700"
+          onClick={logout}
+        >
+          Sair
         </Button>
       </div>
     </div>

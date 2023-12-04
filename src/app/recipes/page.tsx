@@ -6,9 +6,11 @@ import { useEffect, useState } from "react";
 import receitinhalogo from "../../assets/img/receitinha-logo-home.png";
 import { SearchBar } from "@/components/searchbar";
 import { Button } from "@/components/ui/button";
-import { parseCookies } from "nookies";
+import { parseCookies, destroyCookie } from "nookies";
 import jwt from "jsonwebtoken";
 import { Triangle } from "react-loader-spinner";
+import { useRouter } from "next/navigation";
+
 import Link from "next/link";
 import "./styles.css";
 
@@ -39,6 +41,7 @@ export default function Recipes() {
   const [username, setUsername] = useState<string | null>(null);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const router = useRouter();
 
   useEffect(() => {
     const cookies = parseCookies();
@@ -70,8 +73,14 @@ export default function Recipes() {
       });
   }, []);
 
+  const logout = () => {
+    destroyCookie(null, "access_token");
+    destroyCookie(null, "refresh_token");
+    router.push("/login");
+  };
+
   return (
-    <div className="container relative flex h-screen items-center justify-center p-4 lg:max-w-none lg:grid-cols-2 lg:px-0">
+    <div className="flex h-screen w-full max-w-[1600px] items-start justify-center p-4">
       <div className="h-full w-3/4">
         <div className="flex h-[270px] w-full items-center justify-center">
           <Link href="/home" className="">
@@ -87,9 +96,8 @@ export default function Recipes() {
         </div>
 
         <div>
-          <span className="p-10 text-3xl font-bold">Todas as receitas</span>
+          <span className="block text-left text-3xl font-bold">Todas as receitas</span>
 
-          <div className="flex items-center gap-10 p-10">
             <Triangle
               height="82"
               width="82"
@@ -124,7 +132,6 @@ export default function Recipes() {
                 ))}
               </section>
             )}
-          </div>
         </div>
       </div>
 
@@ -135,8 +142,11 @@ export default function Recipes() {
         <Button className="text-md absolute right-12 top-24 h-12 w-60 rounded-full bg-white hover:bg-green-500 hover:text-white">
           Adicionar nova receita
         </Button>
-        <Button className="w-50 text-md absolute right-12 top-40 h-11 rounded-full bg-gray-700 text-white hover:bg-blue-700 ">
-          Configurações
+        <Button
+          className="w-50 text-md absolute right-12 top-40 h-11 rounded-full bg-gray-400 text-white hover:bg-blue-700"
+          onClick={logout}
+        >
+          Sair
         </Button>
       </div>
     </div>
