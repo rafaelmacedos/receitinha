@@ -158,7 +158,7 @@ export default function Home() {
         </section>
 
         <div className="my-4 flex h-full w-full justify-around gap-4 p-4">
-          <Link href="/register-product" className="w-fit">
+          <Link href="/register-recipe" className="w-fit">
             <Button
               type="button"
               variant="outline"
