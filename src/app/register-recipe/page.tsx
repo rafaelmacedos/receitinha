@@ -10,13 +10,13 @@ import { parseCookies } from "nookies";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-import { RegisterProductForm } from "@/components/register-product-form";
+import { RegisterRecipeForm } from "@/components/register-recipe-form";
 
 export default function RegisterRecipe() {
   return (
-    <div className="container relative flex h-screen items-center justify-center overflow-hidden bg-zinc-200 bg-opacity-40 lg:max-w-none lg:grid-cols-2 lg:px-0">
-      <div className="flex w-3/4 flex-row border border-red-800">
-        <div className="flex flex-col border p-20">
+    <div className="container relative flex h-screen items-center justify-center bg-zinc-200 bg-opacity-40 lg:max-w-none lg:grid-cols-2 lg:px-0">
+      <div className="flex w-3/4 flex-row">
+        <div className="flex flex-col p-20">
           <Link href="/home" className="">
             <Image
               src={receitinhalogo}
@@ -24,10 +24,13 @@ export default function RegisterRecipe() {
               alt="Receitinha Logo"
             />
           </Link>
+          <div className="ml-3 mt-10 text-3xl font-semibold">
+            <h1>Cadastro de Receita</h1>
+          </div>
         </div>
 
         <div className="flex items-center justify-center">
-          <RegisterProductForm />
+          <RegisterRecipeForm />
         </div>
       </div>
 

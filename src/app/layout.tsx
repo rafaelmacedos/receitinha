@@ -1,11 +1,9 @@
+import "./globals.css";
 import { Baloo_2 } from "next/font/google";
 import type { Metadata } from "next";
-
 import { Toaster } from "@/components/ui/toaster";
 
-import "./globals.css";
-
-const baloo2 = Baloo_2({ subsets: ["latin"] });
+const baloo2 = Baloo_2({ subsets: ['latin'], style: ['normal'], weight: ['400', '500', '600', '700', '800'] });
 
 export const metadata: Metadata = {
   title: "Receitinha",

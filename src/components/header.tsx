@@ -6,14 +6,46 @@ import { MagnifyingGlass, SignOut } from '@phosphor-icons/react'
 
 import { Input } from './ui/input'
 import { Button } from './ui/button'
-
+import { useEffect, useState } from 'react'
 import unifacisaLogo from '../assets/img/logo-unifacisa-short.png'
+
+import { parseCookies } from "nookies";
+import jwt from "jsonwebtoken";
 
 interface HeaderProps {
   showSearchBar: boolean
 }
 
+interface DecodedToken {
+  iss?: string;
+  user_id?: string;
+  user_name?: string;
+  sub?: string;
+  exp?: number;
+}
+
 export function Header({ showSearchBar }: HeaderProps) {
+
+  const [username, setUsername] = useState<string | null>(null);
+
+  useEffect(() => {
+    const cookies = parseCookies();
+    const authToken = cookies.access_token;
+
+    const decodedToken = jwt.decode(cookies.access_token) as DecodedToken;
+    const username = decodedToken?.user_name || "Nome de Usuário Padrão";
+
+    setUsername(username);
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    };
+
+  })
+  
+
   const handleSearch = () => {
     alert(
       'Estamos preparando essa feature com carinho! Aguarde as próximas atualizações ❤️',
@@ -47,7 +79,7 @@ export function Header({ showSearchBar }: HeaderProps) {
         </Button>
       </div>
       <div className="flex w-fit items-center gap-3">
-        <h1 className="hidden text-sm lg:block">Bem-vindo, Bruno Catão!</h1>
+        <h1 className="hidden text-sm lg:block">Bem-vindo, {username}!</h1>
         <div className="hidden h-8 w-[1px] bg-white lg:flex" />
         <Link
           href="/login"
