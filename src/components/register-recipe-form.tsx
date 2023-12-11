@@ -186,7 +186,7 @@ export function RegisterRecipeForm() {
         />
         {errors.ingredients && (
           <span className="mb-1 text-xs text-red-500">
-            {errors.ingredients?.message}
+            {errors.ingredients?.message && "Erro nos ingredientes"}
           </span>
         )}
         <p className="text-sm text-muted-foreground">
