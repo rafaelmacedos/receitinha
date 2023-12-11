@@ -80,7 +80,7 @@ export function RegisterProductForm() {
         </Label>
         <Input
           id="name"
-          placeholder="Galaxy A51, Macbook Pro, Bolo de chocolate, Canela de véi, etc..."
+          placeholder="Guisado de Frango, Pé de poico, etc..."
           type="text"
           className='text-sm'
           {...register('name')}
@@ -137,13 +137,12 @@ export function RegisterProductForm() {
       </div>
 
       <div className="flex flex-col gap-2.5">
-        <Label htmlFor="price" className='text-lg'>
-          Preço <span className="text-red-500">*</span>
+        <Label htmlFor="instructions" className='text-lg'>
+          Instruções <span className="text-red-500">*</span>
         </Label>
         <Input
-          id="price"
-          placeholder="R$ 0,00"
-          type="number"
+          id="instructions"
+          type="text"
           step=".01"
           {...register('price')}
         />

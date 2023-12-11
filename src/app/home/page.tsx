@@ -195,7 +195,7 @@ export default function Home() {
                 }}
               >
                 <div className="w-fit rounded-[4px] bg-green-500 px-2">
-                  <span className="text-[24px] font-bold text-white">
+                  <span className="text-[24px] font-bold text-white leading-tight">
                     {recipe.name}
                   </span>
                 </div>
