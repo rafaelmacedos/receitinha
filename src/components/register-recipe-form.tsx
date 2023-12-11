@@ -20,7 +20,7 @@ interface DecodedToken {
   exp?: number;
 }
 
-export function RegisterProductForm() {
+export function RegisterRecipeForm() {
   const productSchema = z.object({
     name: z
       .string()
@@ -90,7 +90,7 @@ export function RegisterProductForm() {
 
   return (
     <form
-      className="flex w-full max-w-screen-md flex-col gap-6"
+      className="flex w-full max-w-screen-md flex-col gap-5"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex flex-col gap-2.5">
