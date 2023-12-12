@@ -14,6 +14,7 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import axios from "axios";
+import { useToast } from "./ui/use-toast";
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -41,10 +42,11 @@ export function RegisterUserForm({ className, ...props }: UserAuthFormProps) {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const router = useRouter();
+  const { toast } = useToast();
 
   const onSubmit: SubmitHandler<Auth> = async (data) => {
     setIsSubmitting(true);
-    console.log(data)
+    console.log(data);
     try {
       const response = await axios.post(
         "https://receita-que-doi-menos-server.up.railway.app/auth/register",
@@ -52,12 +54,20 @@ export function RegisterUserForm({ className, ...props }: UserAuthFormProps) {
       );
 
       if (response.status === 201) {
-        window.alert("Usuário cadastrado com sucesso!");
+        toast({
+          title: "Registro realizado com sucesso!",
+          description: "Faça seu login e aproveite o Receitinha.",
+        });
         await router.push("/login");
         setIsSubmitting(false);
       }
     } catch {
-      window.alert("Falha ao realizar cadastro");
+      toast({
+        variant: "destructive",
+        title: "Falha ao realizar cadastro!",
+        description:
+          "Revise suas credenciais e tente novamente.",
+      });
       setIsSubmitting(false);
     }
   };

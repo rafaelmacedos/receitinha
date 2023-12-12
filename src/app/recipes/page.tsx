@@ -134,16 +134,20 @@ export default function Recipes() {
             )}
         </div>
       </div>
+      {/* Hand Container */}
+      <div className="flex h-full w-1/4 flex-col items-end">
+        <span className="block p-8 text-end text-lg font-bold">
+          Olá, {username}!
+        </span>
 
-      <div className="relative h-full w-[650px]">
-        <div className="m-12 flex items-end justify-end">
-          <span className="self-end text-lg font-bold">Olá, {username}!</span>
-        </div>
-        <Button className="text-md absolute right-12 top-24 h-12 w-60 rounded-full bg-white hover:bg-green-500 hover:text-white">
-          Adicionar nova receita
-        </Button>
+        <Link href="/register-recipe" className="w-fit">
+          <Button className="text-md right-12 top-24 mb-4 h-12 w-60 rounded-full bg-white font-normal hover:bg-green-500 hover:text-white">
+            Adicionar nova receita
+          </Button>
+        </Link>        
+
         <Button
-          className="w-50 text-md absolute right-12 top-40 h-11 rounded-full bg-gray-400 text-white hover:bg-blue-700"
+          className="w-50 text-md right-12 top-40 h-11 rounded-full bg-gray-400 font-normal text-white hover:bg-blue-700"
           onClick={logout}
         >
           Sair
