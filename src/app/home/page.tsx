@@ -158,7 +158,7 @@ export default function Home() {
         </section>
 
         <div className="my-4 flex h-full w-full justify-around gap-4 p-4">
-          <Link href="/register-product" className="w-fit">
+          <Link href="/register-recipe" className="w-fit">
             <Button
               type="button"
               variant="outline"
@@ -215,9 +215,12 @@ export default function Home() {
           Olá, {username}!
         </span>
 
-        <Button className="text-md right-12 top-24 mb-4 h-12 w-60 rounded-full bg-white font-normal hover:bg-green-500 hover:text-white">
-          Adicionar nova receita
-        </Button>
+        <Link href="/register-recipe" className="w-fit">
+          <Button className="text-md right-12 top-24 mb-4 h-12 w-60 rounded-full bg-white font-normal hover:bg-green-500 hover:text-white">
+            Adicionar nova receita
+          </Button>
+        </Link>        
+
         <Button
           className="w-50 text-md right-12 top-40 h-11 rounded-full bg-gray-400 font-normal text-white hover:bg-blue-700"
           onClick={logout}
