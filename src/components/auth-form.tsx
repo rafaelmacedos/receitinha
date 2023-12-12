@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 
 import axios from "axios";
 import jwt from "jsonwebtoken";
+import { useToast } from "./ui/use-toast";
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -39,6 +40,7 @@ export function AuthForm({ className, ...props }: UserAuthFormProps) {
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const router = useRouter();
+  const { toast } = useToast();
 
   const onSubmit: SubmitHandler<Auth> = async (data) => {
     setIsSubmitting(true);
@@ -62,11 +64,21 @@ export function AuthForm({ className, ...props }: UserAuthFormProps) {
       });
 
       if (response.status === 200) {
+        toast({
+          title: "Login Realizado com sucesso!",
+          description:
+            "Aproveite sua experiência no Receitinha.",
+        });
         await router.push("/home");
         setIsSubmitting(false);
       }
     } catch {
-      window.alert("Falha ao realizar login");
+      toast({
+        variant: "destructive",
+        title: "Falha ao realizar login!",
+        description:
+          "Revise suas credenciais e tente novamente.",
+      });
       setIsSubmitting(false);
     }
   };
